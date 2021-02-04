@@ -16,16 +16,25 @@ const dolCust = async (value) => {
     (item) => item.loja_id === 3078
   )[0].loja_spread;
 
-  var convertido =
-    value *
-    (moeda[0].moeda_taxa.toFixed(2) * (taxaLoja + 1)).toFixed(2) *
-    1.011;
+  var actualDolar = (moeda[0].moeda_taxa.toFixed(2) * (taxaLoja + 1)).toFixed(
+    2
+  );
+  var convertido = value * actualDolar * 1.011;
 
-  return {
-    dolars: value,
-    dolarAtual: (moeda[0].moeda_taxa.toFixed(2) * (taxaLoja + 1)).toFixed(2),
-    final: `U$ ${value} = ${(convertido + 0.01).toFixed(2)}`,
-  };
+  return `<!DOCTYPE html>
+  <html>
+  <head>
+  <title>Page Title</title>
+  </head>
+  <body>
+  
+  <h1>Dólares: U$ ${value}</h1>
+  <h1>Dólar Atual: R$ ${actualDolar}</h1>
+  <h1>U$ ${value} = ${(convertido + 0.01).toFixed(2)}</h1>
+  
+  </body>
+  </html>
+  `;
 };
 
 app.use(cors());
